@@ -1,0 +1,76 @@
+<wicket:panel>
+	<div id="accordion">
+		<h3>Agenda</h3>
+		<form wicket:id="form">
+			
+			<p>
+
+				Name: <input type="text" wicket:id="tfName"
+					style="margin-left: 15px" size="51" />
+
+			</p>
+
+			<p>
+				Adresse: <input type="text" wicket:id="tfAdresse" size="51" />
+			</p>
+
+
+			<p>
+				 
+				<!-- <input type="text" wicket:id="tfStadt"
+					style="margin-left: 17px;" /> Fax: <input type="text"
+					wicket:id="tfFaxNb" style="margin-left: 30px;" /> -->
+					
+				Stadt: <select wicket:id="tfStadt" style="margin-left: 17px;"> </select>
+					
+				Fax: <input type="text"	wicket:id="tfFaxNb" style="margin-left:7px;" size="31"/>
+			</p>
+
+
+			<p>
+				Telefon: <input type="text" wicket:id="tfPhone" /> Handy: <input
+					type="text" wicket:id="tfHandy" style="margin-left: 7px;" />
+			</p>
+
+			<p>
+				Email: <input type="text" wicket:id="tfEmail"
+					style="margin-left: 15px;" /> 
+					Geburt: <input type="text" wicket:id="dateTextField" />
+					
+					
+					
+			</p>
+			<p>
+				<label>Notiz:</label>
+				<br>
+				<textarea wicket:id="tfNotiz" rows="5" cols="52"
+					style="margin-left: 60px;"></textarea>
+			</p>
+			<input wicket:id="saveButton" type="submit" value="save"
+				style="margin-left: 70px; height: 35px; width: 30%" />
+		</form>
+
+
+		<h3>Phone Book</h3>
+		<div wicket:id="phonePanel"></div>
+
+		<h3>Task Overview</h3>
+
+		<!--  
+		<div>
+			<p>
+			<button wicket:id="bRefresh">Refresh</button>
+			</p>
+			<p>
+			Which entry do you want to delete? Please choose an ID:
+			<input type="text" wicket:id="tfID">
+			<button wicket:id="bDelete">Delete</button>
+			or
+			<button wicket:id="bDeleteAll">Delete all</button>
+			</p>
+
+			
+
+			</div>-->
+	</div>
+</wicket:panel>
