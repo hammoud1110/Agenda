@@ -135,7 +135,6 @@ public class PanelReminder extends Panel implements Serializable {
 				
 				connect = ReminderController.connect();
 				ReminderController.save(rBean);
-				
 				ReminderController.load(rBean);
 
 			}
