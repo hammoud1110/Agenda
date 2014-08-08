@@ -32,6 +32,7 @@ public class PanelReminder extends Panel implements Serializable {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	public boolean connect=false;
 	ReminderBean rBean = new ReminderBean();
@@ -141,6 +142,9 @@ public class PanelReminder extends Panel implements Serializable {
 		});
 
 		add(new PhoneBookPanel("phonePanel"));
+		
+		add(new TaskOverviewPanel("taskOverview"));
+		
 
 	}
 

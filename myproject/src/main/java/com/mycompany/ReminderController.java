@@ -94,19 +94,18 @@ public class ReminderController {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM AGENDA;");
 
-			//ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ
+			// ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ
 			while (rs.next()) {
 				int id = rs.getInt("ID");
 				String name = rs.getString("Name");
 				String datePicker = rs.getString("AGE");
 				int fax = rs.getInt("FAX");
 				String adresse = rs.getString("address");
-				int handy= rs.getInt("HANDY");
-				int telefon= rs.getInt("TELEFON");
+				int handy = rs.getInt("HANDY");
+				int telefon = rs.getInt("TELEFON");
 				String email = rs.getString("EMAIL");
 				String notiz = rs.getString("NOTIZ");
-				
-			
+
 				rBean.setTfName(name);
 				rBean.setDatePicker(convertStrinfToDate(datePicker));
 				rBean.setTfFaxNb(String.valueOf(fax));
@@ -115,8 +114,7 @@ public class ReminderController {
 				rBean.setTfPhone(String.valueOf(telefon));
 				rBean.setTfEmail(email);
 				rBean.setTfNotiz(notiz);
-				
-				
+
 			}
 		} catch (SQLException e) {
 			System.err.println("something went wrong!");
@@ -181,7 +179,6 @@ public class ReminderController {
 
 	public static String convertDateToString(Date date) {
 
-		// change date into string yyyyMMdd format example "20110914"
 		if (date != null) {
 
 			SimpleDateFormat dateformatyyyyMMdd = new SimpleDateFormat(
@@ -191,18 +188,18 @@ public class ReminderController {
 		}
 		return null;
 	}
+
 	public static Date convertStrinfToDate(String stringDate) {
 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-	    Date convertedDate = null;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		Date convertedDate = null;
 		try {
 			convertedDate = dateFormat.parse(stringDate);
 		} catch (ParseException e) {
-			
+
 		}
 		return convertedDate;
 
-	  
-	  } 
-	
+	}
+
 }

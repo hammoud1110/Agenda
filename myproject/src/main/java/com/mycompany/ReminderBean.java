@@ -8,6 +8,7 @@ package com.mycompany;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ReminderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,6 +29,24 @@ public class ReminderBean implements Serializable {
 	private String tfPhone;
 	private String tfFaxNb;
 	private String tfHandy;
+	private List<String> rBeanList = new ArrayList<String>();
+	
+	
+	public List<String> getrBeanList() {
+		// ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ
+		rBeanList.add(getTfName());
+		rBeanList.add(getDdStadt());
+		rBeanList.add(ReminderController.convertDateToString(getDatePicker()));
+		rBeanList.add(getTfAdresse());
+		rBeanList.add(getTfFaxNb());
+		rBeanList.add(getTfHandy());
+		rBeanList.add(getTfPhone());
+		rBeanList.add(getTfEmail());
+		rBeanList.add(getTfNotiz());
+		
+		
+		return rBeanList;
+	}
 
 	public String getTfPhone() {
 		return tfPhone;
