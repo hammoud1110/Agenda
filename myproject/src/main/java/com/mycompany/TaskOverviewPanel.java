@@ -26,6 +26,8 @@ public class TaskOverviewPanel extends Panel {
 	 */
 	private static final long serialVersionUID = 1411187233945814779L;
 	ReminderBean rBean = new ReminderBean();
+	List<ReminderBean> rBeanList = new ArrayList<ReminderBean>();
+	
 	public Form showForm;
 	public Form hideForm;
 	public Form tableForm;
@@ -50,7 +52,9 @@ public class TaskOverviewPanel extends Panel {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				
-				rBean=ReminderController.load(rBean);
+//				rBean=ReminderController.load(rBean);
+				rBeanList=ReminderController.load(rBeanList);
+				System.out.println(rBeanList);
 				if (visibility == true) {
 
 					tableForm.setVisibilityAllowed(false);
@@ -76,7 +80,9 @@ public class TaskOverviewPanel extends Panel {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				rBean=ReminderController.load(rBean);
+//				rBean=ReminderController.load(rBean);
+				rBeanList=ReminderController.load(rBeanList);
+				System.out.println(rBeanList);
 				if (visibility == false) {
 
 					tableForm.setVisibilityAllowed(true);
@@ -107,8 +113,10 @@ public class TaskOverviewPanel extends Panel {
 		add(tableForm);
 		
 
-		final List<ReminderBean> rBeanList = new ArrayList<ReminderBean>();
-		rBeanList.add(rBean);
+		
+//		rBeanList.add(rBean);
+		rBeanList=ReminderController.load(rBeanList);
+		System.out.println(rBeanList);
 		eachEntry = new ListView<ReminderBean>("eachEntry", rBeanList) {
 			/**
 			 * 

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
@@ -32,9 +33,10 @@ public class PanelReminder extends Panel implements Serializable {
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
-	public boolean connect=false;
+	public boolean connect = false;
+	public List<ReminderBean> rBeanList= new ArrayList<ReminderBean>();
 	ReminderBean rBean = new ReminderBean();
 
 	public PanelReminder(String id) {
@@ -128,23 +130,25 @@ public class PanelReminder extends Panel implements Serializable {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-//				if(connect==false){
-//				 connect = ReminderController.connect();
-//				System.out.println(connect);
-//				}
-//				ReminderController.save(rBean);
+				// if(connect==false){
+				// connect = ReminderController.connect();
+				// System.out.println(connect);
+				// }
+				// ReminderController.save(rBean);
 				
+				rBeanList= ReminderController.load(rBeanList);
+				rBeanList.add(rBean);
+
 				connect = ReminderController.connect();
-				ReminderController.save(rBean);
-				ReminderController.load(rBean);
+				ReminderController.save(rBeanList);
+//				ReminderController.load(rBean);
 
 			}
 		});
 
 		add(new PhoneBookPanel("phonePanel"));
-		
+
 		add(new TaskOverviewPanel("taskOverview"));
-		
 
 	}
 

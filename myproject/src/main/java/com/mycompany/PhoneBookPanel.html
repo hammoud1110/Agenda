@@ -13,28 +13,38 @@ tr.even {
 tr.header {
 	background-color: Pink
 }
+
+
+
 </style>
 
+	<form wicket:id="form">
+		<p>
+		<table style="margin-left: auto; margin-right: auto">
+			<tr class="header">
+				<th>ID</th>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Tel #</th>
+				<th>Delete</th>
+			</tr>
+			<tr wicket:id="eachEntry" class="odd even">
+				<td wicket:id="id"></td>
+				<td wicket:id="firstName"></td>
+				<td wicket:id="lastName"></td>
+				<td wicket:id="telNo"></td>
 
-	<table style="margin-left: auto; margin-right: auto" >
-		<tr class="header">
-			<th>ID</th>
-			<th>First name</th>
-			<th>Last name</th>
-			<th>Tel #</th>
-			<th>Delete</th>
-		</tr>
-		<tr wicket:id="eachEntry" class="odd even">
-			<td wicket:id="id"></td>
-			<td wicket:id="firstName"></td>
-			<td wicket:id="lastName"></td>
-			<td wicket:id="telNo"></td>
+				<td>
+					<form wicket:id="deleteForm">
+						<input wicket:id="deleteLink" type="submit" value="Delete">
+					</form>
+				</td>
+			</tr>
+		</table>
 
-			<td>
-			<form wicket:id="deleteForm" >
-				<input  type="submit" value="Delete">
-			</form>
-			</td>
-		</tr>
-	</table>
+		
+		
+		<button wicket:id="refreshLink" type="submit"><img src="refresh.png" alt=""></button>
+		</p>
+	</form>
 </wicket:panel>

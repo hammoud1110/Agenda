@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.util.List;
 
 public class ReminderController {
 	// connection object for db connection
@@ -59,43 +58,64 @@ public class ReminderController {
 
 	}
 
-	public static void save(ReminderBean rBean) {
+	
 
-		String sql = "INSERT INTO AGENDA (ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ) "
-				+ "VALUES ("
-				+ ++counter
-				+ ",' "
-				+ rBean.getTfName()
-				+ "', ' "
-				+ rBean.getDdStadt()
-				+ "',' "
-				+ convertDateToString(rBean.getDatePicker())
-				+ "',' "
-				+ rBean.getTfAdresse()
-				+ "' ,  "
-				+ rBean.getTfFaxNb()
-				+ ","
-				+ rBean.getTfHandy()
-				+ ","
-				+ rBean.getTfPhone()
-				+ ",' "
-				+ rBean.getTfEmail() + "',' " + rBean.getTfNotiz() + "' );";
+	
+
+	public static void save(List<ReminderBean> rBeanList) {
+
+		for (ReminderBean rBean : rBeanList) {
+
+			String sql = "INSERT INTO AGENDA (ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ) "
+					+ "VALUES ("
+					+ ++counter
+					+ ",' "
+					+ rBean.getTfName()
+					+ "', ' "
+					+ rBean.getDdStadt()
+					+ "',' "
+					+ convertDateToString(rBean.getDatePicker())
+					+ "',' "
+					+ rBean.getTfAdresse()
+					+ "' ,  "
+					+ rBean.getTfFaxNb()
+					+ ","
+					+ rBean.getTfHandy()
+					+ ","
+					+ rBean.getTfPhone()
+					+ ",' "
+					+ rBean.getTfEmail() + "',' " + rBean.getTfNotiz() + "' );";
+			try {
+				
+				stmt.executeUpdate(sql);
+				
+
+			} catch (SQLException e) {
+				System.err.println("Something went wrong while saving");
+				e.printStackTrace();
+			}
+		}
 		try {
-			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Something wrong while saving");
+		
 			e.printStackTrace();
 		}
 	}
 
-	public static ReminderBean load(ReminderBean rBean) {
+	public static List<ReminderBean> load(List<ReminderBean> rBeanList) {
 		ResultSet rs;
+		
+		System.out.println(rBeanList.size());
+		
+		//delete all beans from list
+		rBeanList.clear();
 		try {
 			rs = stmt.executeQuery("SELECT * FROM AGENDA;");
 
 			// ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ
 			while (rs.next()) {
+				ReminderBean rBean = new ReminderBean();
 				int id = rs.getInt("ID");
 				String name = rs.getString("Name");
 				String stadt = rs.getString("STADT");
@@ -116,13 +136,13 @@ public class ReminderController {
 				rBean.setTfPhone(String.valueOf(telefon));
 				rBean.setTfEmail(email);
 				rBean.setTfNotiz(notiz);
-
+				rBeanList.add(rBean);
 			}
 		} catch (SQLException e) {
 			System.err.println("something went wrong!");
 			e.printStackTrace();
 		}
-		return rBean;
+		return rBeanList;
 
 	}
 
