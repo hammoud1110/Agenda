@@ -98,6 +98,7 @@ public class ReminderController {
 			while (rs.next()) {
 				int id = rs.getInt("ID");
 				String name = rs.getString("Name");
+				String stadt = rs.getString("STADT");
 				String datePicker = rs.getString("AGE");
 				int fax = rs.getInt("FAX");
 				String adresse = rs.getString("address");
@@ -108,6 +109,7 @@ public class ReminderController {
 
 				rBean.setTfName(name);
 				rBean.setDatePicker(convertStrinfToDate(datePicker));
+				rBean.setDdStadt(stadt);
 				rBean.setTfFaxNb(String.valueOf(fax));
 				rBean.setTfAdresse(adresse);
 				rBean.setTfHandy(String.valueOf(handy));

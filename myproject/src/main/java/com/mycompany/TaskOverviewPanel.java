@@ -17,15 +17,20 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.junit.internal.runners.model.EachTestNotifier;
 
 public class TaskOverviewPanel extends Panel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1411187233945814779L;
 	ReminderBean rBean = new ReminderBean();
 	public Form showForm;
 	public Form hideForm;
 	public Form tableForm;
 	public boolean visibility = false;
-	public ListView<String> eachEntry;
+	public ListView<ReminderBean> eachEntry;
 
 	public TaskOverviewPanel(String id) {
 		super(id);
@@ -44,6 +49,8 @@ public class TaskOverviewPanel extends Panel {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
+				
+				rBean=ReminderController.load(rBean);
 				if (visibility == true) {
 
 					tableForm.setVisibilityAllowed(false);
@@ -62,7 +69,6 @@ public class TaskOverviewPanel extends Panel {
 		hideForm.add(new AjaxLink("hideButton") {
 
 			private static final long serialVersionUID = 1L;
-
 			@Override
 			protected void onConfigure() {
 				setEnabled(visibility);
@@ -70,6 +76,7 @@ public class TaskOverviewPanel extends Panel {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
+				rBean=ReminderController.load(rBean);
 				if (visibility == false) {
 
 					tableForm.setVisibilityAllowed(true);
@@ -86,6 +93,11 @@ public class TaskOverviewPanel extends Panel {
 		});
 
 		tableForm = new Form("tableForm") {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onConfigure() {
 				setVisible(visibility);
@@ -93,22 +105,29 @@ public class TaskOverviewPanel extends Panel {
 		};
 		tableForm.setOutputMarkupId(true).setOutputMarkupPlaceholderTag(true);
 		add(tableForm);
-		ReminderController.load(rBean);
+		
 
-		eachEntry = new ListView("eachEntry", rBean.getrBeanList()) {
+		final List<ReminderBean> rBeanList = new ArrayList<ReminderBean>();
+		rBeanList.add(rBean);
+		eachEntry = new ListView<ReminderBean>("eachEntry", rBeanList) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			protected void populateItem(ListItem item) {
-				item.setModel(new CompoundPropertyModel(item.getModelObject()));
-
-				item.add(new Label("id"));
-				item.add(new Label("name"));
-				item.add(new Label("stadt"));
-				item.add(new Label("age"));
-				item.add(new Label("adresse"));
-				item.add(new Label("fax"));
-				item.add(new Label("handy"));
-				item.add(new Label("telefon"));
-				item.add(new Label("email"));
-				item.add(new Label("notiz"));
+				ReminderBean r = (ReminderBean) item.getModelObject();
+				
+				item.add(new Label("id", Model.of("1")));
+				item.add(new Label("name",r.getTfName()));
+				item.add(new Label("stadt",new PropertyModel<String>(item.getDefaultModel(), "ddStadt")));
+				item.add(new Label("age",new PropertyModel<String>(item.getDefaultModel(), "datePicker")));
+				item.add(new Label("adresse",new PropertyModel<String>(item.getDefaultModel(), "tfAdresse")));
+				item.add(new Label("fax",new PropertyModel<String>(item.getDefaultModel(), "tfFaxNb")));
+				item.add(new Label("handy",new PropertyModel<String>(item.getDefaultModel(), "tfHandy")));
+				item.add(new Label("telefon",new PropertyModel<String>(item.getDefaultModel(), "tfPhone")));
+				item.add(new Label("email",new PropertyModel<String>(item.getDefaultModel(), "tfEmail")));
+				item.add(new Label("notiz",new PropertyModel<String>(item.getDefaultModel(), "tfNotiz")));
 
 			}
 
