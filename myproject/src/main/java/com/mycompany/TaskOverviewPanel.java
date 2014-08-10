@@ -126,7 +126,7 @@ public class TaskOverviewPanel extends Panel {
 			protected void populateItem(ListItem item) {
 				ReminderBean r = (ReminderBean) item.getModelObject();
 				
-				item.add(new Label("id", Model.of("1")));
+				item.add(new Label("id", r.getId()));
 				item.add(new Label("name",r.getTfName()));
 				item.add(new Label("stadt",new PropertyModel<String>(item.getDefaultModel(), "ddStadt")));
 				item.add(new Label("age",new PropertyModel<String>(item.getDefaultModel(), "datePicker")));

@@ -58,17 +58,13 @@ public class ReminderController {
 
 	}
 
-	
-
-	
-
 	public static void save(List<ReminderBean> rBeanList) {
 
 		for (ReminderBean rBean : rBeanList) {
 
 			String sql = "INSERT INTO AGENDA (ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ) "
 					+ "VALUES ("
-					+ ++counter
+					+ rBean.getId()
 					+ ",' "
 					+ rBean.getTfName()
 					+ "', ' "
@@ -86,9 +82,8 @@ public class ReminderController {
 					+ ",' "
 					+ rBean.getTfEmail() + "',' " + rBean.getTfNotiz() + "' );";
 			try {
-				
+
 				stmt.executeUpdate(sql);
-				
 
 			} catch (SQLException e) {
 				System.err.println("Something went wrong while saving");
@@ -98,17 +93,17 @@ public class ReminderController {
 		try {
 			stmt.close();
 		} catch (SQLException e) {
-		
+
 			e.printStackTrace();
 		}
 	}
 
 	public static List<ReminderBean> load(List<ReminderBean> rBeanList) {
 		ResultSet rs;
-		
+
 		System.out.println(rBeanList.size());
-		
-		//delete all beans from list
+
+		// delete all beans from list
 		rBeanList.clear();
 		try {
 			rs = stmt.executeQuery("SELECT * FROM AGENDA;");
@@ -127,6 +122,7 @@ public class ReminderController {
 				String email = rs.getString("EMAIL");
 				String notiz = rs.getString("NOTIZ");
 
+				rBean.setId(id);
 				rBean.setTfName(name);
 				rBean.setDatePicker(convertStrinfToDate(datePicker));
 				rBean.setDdStadt(stadt);
@@ -144,6 +140,17 @@ public class ReminderController {
 		}
 		return rBeanList;
 
+	}
+
+	public static void delete(ReminderBean rBean) {
+		try {
+			stmt = conn.createStatement();
+			String sql = "DELETE from AGENDA where ID=" + rBean.getId() + ";";
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static ResultSet select(String query) {

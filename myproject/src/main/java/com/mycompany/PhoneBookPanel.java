@@ -38,21 +38,25 @@ public class PhoneBookPanel extends Panel {
 		
 		rBeanList=ReminderController.load(rBeanList);
 		eachEntry = new ListView<ReminderBean> ("eachEntry", rBeanList) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@SuppressWarnings({ "unchecked", "deprecation" })
 			protected void populateItem(ListItem<ReminderBean>  item) {
 //				item.setModel(new CompoundPropertyModel(item.getModelObject()));
 				ReminderBean r = (ReminderBean) item.getModelObject();
 				item.add(new AttributeModifier("class", true, new Model(item
 						.getIndex() % 2 == 0 ? "even" : "odd")));
-				item.add(new Label("id",r.getTfID()));
-				item.add(new Label("firstName",r.getTfName()));
-				item.add(new Label("lastName",r.getTfEmail()));
+				item.add(new Label("name",r.getTfName()));
+				item.add(new Label("stadt",r.getDdStadt()));
 				item.add(new Label("telNo",r.getTfPhone()));
+				item.add(new Label("email",r.getTfEmail()));
 				item.add(createDeleteButton(item));
 			}
 
 		};
-		
-		
 		
 		form.add(new AjaxLink("refreshLink") {
 
@@ -66,15 +70,7 @@ public class PhoneBookPanel extends Panel {
 			}
 		});
 		
-		//
-		
-//		String url = null;
-//		ExternalLink link = new ExternalLink("link", url);
-//		Image image = new Image("img", new SharedResourceReference(PhoneBookPanel.class, "images/MyImage.png"));
-//		link.add(image);
-//		add(link);
-		///
-		
+	
 		form.add(eachEntry);
 	}
 
@@ -88,7 +84,9 @@ public class PhoneBookPanel extends Panel {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				
-				rBeanList.remove((ReminderBean) item.getModelObject());
+				ReminderBean rBean = (ReminderBean) item.getModelObject();
+				rBeanList.remove(rBean);
+				ReminderController.delete(rBean);
 				target.add(form);
 			}
 		});

@@ -7,26 +7,20 @@
 package com.mycompany;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.datetime.StyleDateConverter;
-import org.apache.wicket.datetime.markup.html.form.DateTextField;
-import org.apache.wicket.event.IEvent;
+import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
 public class PanelReminder extends Panel implements Serializable {
@@ -36,6 +30,7 @@ public class PanelReminder extends Panel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public boolean connect = false;
+	private static int counter=0;
 	public List<ReminderBean> rBeanList= new ArrayList<ReminderBean>();
 	ReminderBean rBean = new ReminderBean();
 
@@ -130,12 +125,13 @@ public class PanelReminder extends Panel implements Serializable {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
+			
 				// if(connect==false){
 				// connect = ReminderController.connect();
 				// System.out.println(connect);
 				// }
 				// ReminderController.save(rBean);
-				
+				rBean.setId(++counter);
 				rBeanList= ReminderController.load(rBeanList);
 				rBeanList.add(rBean);
 
@@ -169,10 +165,9 @@ public class PanelReminder extends Panel implements Serializable {
 	}
 
 	public DateTextField createTextField() {
-
+		//new PropertyModel<Date>(rBean, "datePicker"),new StyleDateConverter("F-", true));
 		DateTextField dateTextField = new DateTextField("dateTextField",
-				new PropertyModel<Date>(rBean, "datePicker"),
-				new StyleDateConverter("S-", true));
+				new PropertyModel<Date>(rBean, "datePicker"),"dd.MM.yyyy");
 		DatePicker datePicker = new DatePicker();
 		datePicker.setShowOnFieldClick(true);
 		datePicker.setAutoHide(true);

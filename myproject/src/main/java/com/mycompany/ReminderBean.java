@@ -16,7 +16,9 @@ public class ReminderBean implements Serializable {
 	private String tfDate;
 	private String tfTime;
 	private String tfTask;
-	private String tfID;
+	private int id;
+	
+
 	private String tfIDDelete;
 	private String tfName;
 
@@ -56,12 +58,12 @@ public class ReminderBean implements Serializable {
 		this.tfPhone = tfPhone;
 	}
 
-	public String getTfID() {
-		return tfID;
+	public int getId() {
+		return id;
 	}
 
-	public void setTfID(String tfID) {
-		this.tfID = tfID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTfDate() {
