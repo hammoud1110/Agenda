@@ -7,219 +7,269 @@ package com.mycompany;
 
 import java.io.Serializable;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
-public class PanelCalc extends Panel implements Serializable{
-	
+public class PanelCalc extends Panel implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private int result1 = 0;
+	private double result = 0;
+
+	private String txt = "";
+	private String toBeUsed = "";
+	boolean flag = false;
+	private String operation = "";
+
 	String s = "";
 	String aktuelleZahl = "";
 	int zeichen = 0;
 	double gesamt = 0;
-	
+
 	Model<String> strMdl = Model.of("Click Button to Calc");
 	TextField<String> tfAusgabe = new TextField<String>("tfAusgabe", strMdl);
-	
-	
-	Form bEins = new Form("bEins"){
-		protected void onSubmit(){	
-			s = s + "1";
-			aktuelleZahl = aktuelleZahl + "1";
-			strMdl.setObject(s);
-		}
-	};
-	Form bZwei = new Form("bZwei"){
-		protected void onSubmit(){
-			s = s + "2";
-			aktuelleZahl = aktuelleZahl + "2";
-			strMdl.setObject(s);
-		}
-	};
-	Form bDrei = new Form("bDrei"){
-		protected void onSubmit(){
-			s = s + "3";
-			aktuelleZahl = aktuelleZahl + "3";
-			strMdl.setObject(s);
-		}
-	};
-	Form bVier = new Form("bVier"){
-		protected void onSubmit(){
-			s = s + "4";
-			aktuelleZahl = aktuelleZahl + "4";
-			strMdl.setObject(s);
-		}
-	};
-	Form bFuenf = new Form("bFuenf"){
-		protected void onSubmit(){
-			s = s + "5";
-			aktuelleZahl = aktuelleZahl + "5";
-			strMdl.setObject(s);
-		}
-	};
-	Form bSechs = new Form("bSechs"){
-		protected void onSubmit(){
-			s = s + "6";
-			aktuelleZahl = aktuelleZahl + "6";
-			strMdl.setObject(s);
-		}
-	};
-	Form bSieben = new Form("bSieben"){
-		protected void onSubmit(){
-			s = s + "7";
-			aktuelleZahl = aktuelleZahl + "7";
-			strMdl.setObject(s);
-		}
-	};
-	Form bAcht = new Form("bAcht"){
-		protected void onSubmit(){
-			s = s + "8";
-			aktuelleZahl = aktuelleZahl + "8";
-			strMdl.setObject(s);
-		}
-	};
-	Form bNeun = new Form("bNeun"){
-		protected void onSubmit(){
-			s = s + "9";
-			aktuelleZahl = aktuelleZahl + "9";
-			strMdl.setObject(s);
-		}
-	};
-	Form bNull = new Form("bNull"){
-		protected void onSubmit(){
-			s = s + "0";
-			aktuelleZahl = aktuelleZahl + "0";
-			strMdl.setObject(s);
-		}
-	};
-	Form bDelete = new Form("bDelete"){
-		protected void onSubmit(){
-			s =  "";
-			gesamt = 0;
-			zeichen = 0;
-			aktuelleZahl = "";
-			strMdl.setObject(s);
-		}
-	};
-	Form bDeleteOne = new Form("bDeleteOne"){
-		protected void onSubmit(){
-			//DELETE ONE CHAR
-			if(s.length() != 0){
-				int laenge = s.length() - 1;
-				s = s.substring(0, laenge);
-			}
-			//METHODE BERECHNE NEU
-			strMdl.setObject(s);
-		}
-	};
-	Form bPlus = new Form("bPlus"){
-		protected void onSubmit(){
-			s =  s + "+";
-			if(aktuelleZahl != ""){
-				gesamt = berechne(aktuelleZahl);
-			}
-			zeichen = 1;
-			strMdl.setObject(s);
-		}
-	};
-	Form bMinus = new Form("bMinus"){
-		protected void onSubmit(){
-			s =  s + "-";
-			if(aktuelleZahl != ""){
-				gesamt = berechne(aktuelleZahl);
-			}
-			zeichen = 2;
-			strMdl.setObject(s);
-		}
-	};
-	Form bMal = new Form("bMal"){
-		protected void onSubmit(){
-			s =  s + "x";
-			if(aktuelleZahl != ""){
-				gesamt = berechne(aktuelleZahl);
-			}
-			zeichen = 3;
-			strMdl.setObject(s);
-		}
-	};
-	Form bDurch = new Form("bDurch"){
-		protected void onSubmit(){
-			s =  s + "/";
-			if(aktuelleZahl != ""){
-				gesamt = berechne(aktuelleZahl);
-			}
-			zeichen = 4;
-			strMdl.setObject(s);
-		}
-	};
-	Form bPunkt = new Form("bPunkt"){
-		protected void onSubmit(){
-			s =  s + ".";
-			aktuelleZahl = aktuelleZahl + ".";
-			strMdl.setObject(s);
-		}
-	};
-	Form bGleich = new Form("bGleich"){
-		protected void onSubmit(){
-			if(aktuelleZahl != ""){
-				gesamt = berechne(aktuelleZahl);
-			}
-			s =  String.valueOf(gesamt);
-			aktuelleZahl = "";
-			strMdl.setObject(s);
-		}
-	};
 
 	public PanelCalc(String id) {
 		super(id);
-		add(bEins);
-		add(bZwei);
-		add(bDrei);
-		add(bVier);
-		add(bFuenf);
-		add(bSechs);
-		add(bSieben);
-		add(bAcht);
-		add(bNeun);
-		add(bNull);
-		add(bDelete);
-		add(bDeleteOne);
-		add(bPlus);
-		add(bMinus);
-		add(bMal);
-		add(bDurch);
-		add(bPunkt);
-		add(bGleich);
-		
+
+		final Form form = new Form("form");
+		add(form).setOutputMarkupId(true).setOutputMarkupPlaceholderTag(true);
+
 		tfAusgabe.setOutputMarkupId(true);
-		add(tfAusgabe);
+		form.add(tfAusgabe);
+
+		form.add(new AjaxLink("zero") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "0";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+
+		form.add(new AjaxLink("one") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "1";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+
+		form.add(new AjaxLink("two") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "2";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("three") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "3";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("four") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "4";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("five") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "5";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("six") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "6";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("seven") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "7";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("eight") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "8";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("nine") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + "9";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+
+		form.add(new AjaxLink("plus") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				if (flag == false) {
+					System.out.println("+");
+					toBeUsed = txt;
+				}
+				txt = "";
+				operation = "+";
+
+				System.out.println("txt: " + txt);
+			}
+		});
+		form.add(new AjaxLink("minus") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				if (flag == false) {
+					System.out.println("-");
+					toBeUsed = txt;
+				}
+				txt = "";
+				operation = "-";
+			}
+		});
+		form.add(new AjaxLink("divide") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				if (flag == false) {
+					System.out.println("/");
+					toBeUsed = txt;
+				}
+				txt = "";
+				operation = "/";
+			}
+		});
+		form.add(new AjaxLink("multiply") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				if (flag == false) {
+					System.out.println("X");
+					toBeUsed = txt;
+				}
+				txt = "";
+				operation = "X";
+			}
+		});
+		form.add(new AjaxLink("comma") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				txt = txt + ".";
+				strMdl.setObject(txt);
+				System.out.println("txt is " + txt);
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("equal") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+
+				if (operation.equals("/")) {
+					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+					result = Double.parseDouble(toBeUsed)
+							/ Double.parseDouble(txt);
+				} else if (operation.equals("+")) {
+					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+					result = Double.parseDouble(toBeUsed)
+							+ Double.parseDouble(txt);
+				} else if (operation.equals("X")) {
+					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+					result = Double.parseDouble(toBeUsed)
+							* Double.parseDouble(txt);
+				} else {
+					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+					result = Double.parseDouble(toBeUsed)
+							- Double.parseDouble(txt);
+				}
+				toBeUsed = String.valueOf(result);
+				System.out.println("toBeUsed " + toBeUsed);
+				strMdl.setObject(toBeUsed);
+				flag = true;
+
+				target.add(form);
+			}
+		});
+		form.add(new AjaxLink("delete") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				//DELETE ONE CHAR
+				if(txt.length() != 0){
+					int laenge = txt.length() - 1;
+					txt = txt.substring(0, laenge);
+				}
+				//METHODE BERECHNE NEU
+				strMdl.setObject(txt);
+				
+				target.add(form);
+			}
+		});
+
+		form.add(new AjaxLink("deleteAll") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+
+				result = 0.0;
+				strMdl.setObject("");
+				txt = "";
+				toBeUsed = "";
+				flag = false;
+				target.add(form);
+			}
+
+		});
+
 	}
-	
-	public double berechne(String gedrueckt){
-		double gedruecktInt = Double.parseDouble(gedrueckt);
-		switch (zeichen) {
-		case 1:
-				gesamt = gesamt + gedruecktInt;
-			break;
-		case 2:
-				gesamt = gesamt - gedruecktInt;
-			break;
-		case 3:
-				gesamt = gesamt * gedruecktInt;
-			break;
-		case 4:
-				gesamt = gesamt / gedruecktInt;
-			break;
-		default:
-			gesamt = Double.parseDouble(aktuelleZahl);
-			break;
-		}
-		aktuelleZahl = "";
-		return gesamt;
-	}
+
 }
