@@ -30,12 +30,12 @@ public class PhoneBookPanel extends Panel {
 	private List<ReminderBean> rBeanList = new ArrayList<ReminderBean>();
 	private ListView<ReminderBean>  eachEntry;
 	private final Form form;
-	// PhoneBook.getGlobal() .getEntries()
 	public PhoneBookPanel(String id) {
 		super(id);
 		form = new Form("form");
 		add(form).setOutputMarkupPlaceholderTag(true);
 		
+		// PhoneBook.getGlobal() .getEntries()
 		rBeanList=ReminderController.load(rBeanList);
 		eachEntry = new ListView<ReminderBean> ("eachEntry", rBeanList) {
 			/**

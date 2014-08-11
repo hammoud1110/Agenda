@@ -177,7 +177,6 @@ public class PanelCalc extends Panel implements Serializable{
 
 	public PanelCalc(String id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 		add(bEins);
 		add(bZwei);
 		add(bDrei);

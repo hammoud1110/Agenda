@@ -2,11 +2,17 @@
 	<div id="accordion">
 		<h3>Agenda</h3>
 		<form wicket:id="form">
+			<div wicket:id="feedback"></div>
+			
 			
 			<p>
 
 				Name: <input type="text" wicket:id="tfName"
 					style="margin-left: 15px" size="51" />
+					
+					<button wicket:id="neuerEintrag" type="submit">
+				<img src="new.png" alt="neuerEintrag">
+			</button>
 
 			</p>
 
@@ -46,8 +52,11 @@
 				<textarea wicket:id="tfNotiz" rows="5" cols="52"
 					style="margin-left: 60px;"></textarea>
 			</p>
-			<input wicket:id="saveButton" type="submit" value="save"
+			<input wicket:id="saveButton" type="submit" value="Speichern"
 				style="margin-left: 70px; height: 35px; width: 30%" />
+				
+				
+				
 		</form>
 
 

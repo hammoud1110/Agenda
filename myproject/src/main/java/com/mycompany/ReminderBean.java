@@ -49,6 +49,22 @@ public class ReminderBean implements Serializable {
 		
 		return rBeanList;
 	}
+	
+	
+	public void clearBean() {
+		// NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ
+		this.setTfName("");
+		this.setTfAdresse("");
+		this.setDdStadt(null);
+		this.setDatePicker(ReminderController.convertStrinfToDate(""));
+		this.setTfEmail("");
+		this.setTfFaxNb("");
+		this.setTfHandy("");
+		this.setTfPhone("");
+		this.setTfNotiz("");
+		
+		
+	}
 
 	public String getTfPhone() {
 		return tfPhone;

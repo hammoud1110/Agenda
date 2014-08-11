@@ -16,10 +16,12 @@ import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
+import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 
@@ -30,17 +32,26 @@ public class PanelReminder extends Panel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public boolean connect = false;
-	private static int counter=0;
-	public List<ReminderBean> rBeanList= new ArrayList<ReminderBean>();
+	// private static int counter=0;
+	public List<ReminderBean> rBeanList = new ArrayList<ReminderBean>();
+	private final Form form;
 	ReminderBean rBean = new ReminderBean();
 
 	public PanelReminder(String id) {
 		super(id);
 		ReminderController.connect();
-		Form form = new Form("form");
-		add(form);
+		form = new Form("form");
+		add(form).setOutputMarkupPlaceholderTag(true).setOutputMarkupId(true);
 
-		TextField<String> tfName = new TextField<String>("tfName",
+	        ComponentFeedbackMessageFilter filter = new ComponentFeedbackMessageFilter(form);
+
+	        FeedbackPanel feedback = new FeedbackPanel("feedback", filter);
+//	        feedback.setEscapeModelStrings(false);
+	        form.add(feedback); 
+		
+	        
+
+		final TextField<String> tfName = new TextField<String>("tfName",
 				new PropertyModel<String>(rBean, "tfName"));
 
 		tfName.add(new OnChangeAjaxBehavior() {
@@ -51,7 +62,7 @@ public class PanelReminder extends Panel implements Serializable {
 			}
 		});
 
-		TextField<String> tfAdresse = new TextField<String>("tfAdresse",
+		final TextField<String> tfAdresse = new TextField<String>("tfAdresse",
 				new PropertyModel<String>(rBean, "tfAdresse"));
 		tfAdresse.add(new OnChangeAjaxBehavior() {
 
@@ -64,7 +75,7 @@ public class PanelReminder extends Panel implements Serializable {
 		// TextField<String> tfStadt = new TextField<String>("tfStadt",
 		// new PropertyModel<String>(rBean, "tfStadt"));
 
-		TextField<String> tfFaxNb = new TextField<String>("tfFaxNb",
+		final TextField<String> tfFaxNb = new TextField<String>("tfFaxNb",
 				new PropertyModel<String>(rBean, "tfFaxNb"));
 
 		tfFaxNb.add(new OnChangeAjaxBehavior() {
@@ -75,7 +86,7 @@ public class PanelReminder extends Panel implements Serializable {
 			}
 		});
 
-		TextField<String> tfPhone = new TextField<String>("tfPhone",
+		final TextField<String> tfPhone = new TextField<String>("tfPhone",
 				new PropertyModel<String>(rBean, "tfPhone"));
 
 		tfPhone.add(new OnChangeAjaxBehavior() {
@@ -85,7 +96,7 @@ public class PanelReminder extends Panel implements Serializable {
 
 			}
 		});
-		TextField<String> tfHandy = new TextField<String>("tfHandy",
+		final TextField<String> tfHandy = new TextField<String>("tfHandy",
 				new PropertyModel<String>(rBean, "tfHandy"));
 		tfHandy.add(new OnChangeAjaxBehavior() {
 
@@ -94,7 +105,7 @@ public class PanelReminder extends Panel implements Serializable {
 
 			}
 		});
-		TextField<String> tfEmail = new TextField<String>("tfEmail",
+		final TextField<String> tfEmail = new TextField<String>("tfEmail",
 				new PropertyModel<String>(rBean, "tfEmail"));
 
 		tfEmail.add(new OnChangeAjaxBehavior() {
@@ -104,7 +115,7 @@ public class PanelReminder extends Panel implements Serializable {
 
 			}
 		});
-		DropDownChoice tfStadt = new DropDownChoice("tfStadt",
+		final DropDownChoice tfStadt = new DropDownChoice("tfStadt",
 				new PropertyModel<String>(rBean, "ddStadt"),
 				Stadt.getStringValues());
 
@@ -116,41 +127,7 @@ public class PanelReminder extends Panel implements Serializable {
 			}
 		});
 
-		form.add(tfName, tfAdresse, tfStadt, tfFaxNb, tfPhone, tfHandy, tfEmail);
-		form.add(creatTextArea());
-		form.add(createTextField());
-		form.add(new AjaxLink("saveButton") {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onClick(AjaxRequestTarget target) {
-			
-				// if(connect==false){
-				// connect = ReminderController.connect();
-				// System.out.println(connect);
-				// }
-				// ReminderController.save(rBean);
-				rBean.setId(++counter);
-				rBeanList= ReminderController.load(rBeanList);
-				rBeanList.add(rBean);
-
-				connect = ReminderController.connect();
-				ReminderController.save(rBeanList);
-//				ReminderController.load(rBean);
-
-			}
-		});
-
-		add(new PhoneBookPanel("phonePanel"));
-
-		add(new TaskOverviewPanel("taskOverview"));
-
-	}
-
-	public TextArea<String> creatTextArea() {
-
-		TextArea<String> tfNotiz = new TextArea<String>("tfNotiz",
+		final TextArea<String> tfNotiz = new TextArea<String>("tfNotiz",
 				new PropertyModel<String>(rBean, "tfNotiz"));
 		tfNotiz.add(new OnChangeAjaxBehavior() {
 
@@ -160,14 +137,8 @@ public class PanelReminder extends Panel implements Serializable {
 			}
 		});
 
-		return tfNotiz;
-
-	}
-
-	public DateTextField createTextField() {
-		//new PropertyModel<Date>(rBean, "datePicker"),new StyleDateConverter("F-", true));
-		DateTextField dateTextField = new DateTextField("dateTextField",
-				new PropertyModel<Date>(rBean, "datePicker"),"dd.MM.yyyy");
+		final DateTextField dateTextField = new DateTextField("dateTextField",
+				new PropertyModel<Date>(rBean, "datePicker"), "dd.MM.yyyy");
 		DatePicker datePicker = new DatePicker();
 		datePicker.setShowOnFieldClick(true);
 		datePicker.setAutoHide(true);
@@ -179,7 +150,44 @@ public class PanelReminder extends Panel implements Serializable {
 
 			}
 		});
-		return dateTextField;
+
+		form.add(tfName, tfAdresse, tfStadt, tfFaxNb, tfPhone, tfHandy, tfEmail);
+		form.add(tfNotiz);
+		form.add(dateTextField);
+		form.add(new AjaxLink("saveButton") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+
+				rBeanList = ReminderController.load(rBeanList);
+				rBeanList.add(rBean);
+
+				connect = ReminderController.connect();
+				ReminderController.save(rBeanList);
+				
+				form.info("Der Eintrag wurde gespeichert");
+				target.add(findParent(HomePage.class));
+			}
+		});
+
+		form.add(new AjaxLink("neuerEintrag") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				rBean.clearBean();
+//				target.add(tfName, tfAdresse, tfStadt, tfFaxNb, tfPhone,
+//						tfHandy, tfEmail, tfNotiz, dateTextField);
+				target.add(findParent(HomePage.class));
+			}
+		});
+
+		add(new PhoneBookPanel("phonePanel"));
+
+		add(new TaskOverviewPanel("taskOverview"));
 
 	}
 

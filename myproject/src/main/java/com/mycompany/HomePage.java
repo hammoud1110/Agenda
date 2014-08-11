@@ -15,7 +15,6 @@ public class HomePage extends WebPage implements Serializable{
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 		
-		// TODO Add your page's components here
 		add(pCalc);
 		add(pReminder);
 		add(pRest);

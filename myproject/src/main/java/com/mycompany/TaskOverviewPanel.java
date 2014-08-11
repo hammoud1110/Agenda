@@ -52,9 +52,8 @@ public class TaskOverviewPanel extends Panel {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				
-//				rBean=ReminderController.load(rBean);
 				rBeanList=ReminderController.load(rBeanList);
-				System.out.println(rBeanList);
+				
 				if (visibility == true) {
 
 					tableForm.setVisibilityAllowed(false);
@@ -82,7 +81,7 @@ public class TaskOverviewPanel extends Panel {
 			public void onClick(AjaxRequestTarget target) {
 //				rBean=ReminderController.load(rBean);
 				rBeanList=ReminderController.load(rBeanList);
-				System.out.println(rBeanList);
+				
 				if (visibility == false) {
 
 					tableForm.setVisibilityAllowed(true);
@@ -116,7 +115,7 @@ public class TaskOverviewPanel extends Panel {
 		
 //		rBeanList.add(rBean);
 		rBeanList=ReminderController.load(rBeanList);
-		System.out.println(rBeanList);
+		
 		eachEntry = new ListView<ReminderBean>("eachEntry", rBeanList) {
 			/**
 			 * 

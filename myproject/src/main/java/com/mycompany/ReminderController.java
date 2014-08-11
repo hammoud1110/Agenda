@@ -36,18 +36,8 @@ public class ReminderController {
 			conn.setAutoCommit(true);
 			stmt = conn.createStatement();
 
-			stmt.executeUpdate("drop table if exists AGENDA;");
-			String sql = "CREATE TABLE AGENDA "
-					+ "(ID INT PRIMARY  KEY     NOT NULL,"
-					+ " NAME            VARCHAR(50)    NOT NULL, "
-					+ " STADT           TEXT    NOT NULL, "
-					+ " AGE           	TEXT     NOT NULL, "
-					+ " ADDRESS         TEXT, " + " FAX       		 INT, "
-					+ " HANDY       	 INT, " + " TELEFON         INT, "
-					+ " EMAIL       	 TEXT, " + " NOTIZ       	 TEXT)";
-
-			stmt.execute(sql);
-			stmt.close();
+			 stmt.executeUpdate("drop table if exists AGENDA;");
+			intializeDatabase();
 
 			isConnected = true;
 		} catch (Exception e) {
@@ -58,14 +48,25 @@ public class ReminderController {
 
 	}
 
+	private static void intializeDatabase() throws SQLException {
+		String sql = "CREATE TABLE AGENDA " + "(ID INTEGER PRIMARY  KEY,"
+				+ " NAME            VARCHAR(50)    NOT NULL, "
+				+ " STADT           TEXT    NOT NULL, "
+				+ " AGE           	TEXT     NOT NULL, "
+				+ " ADDRESS         TEXT, " + " FAX       		 INT, "
+				+ " HANDY       	 INT, " + " TELEFON         INT, "
+				+ " EMAIL       	 TEXT, " + " NOTIZ       	 TEXT)";
+
+		stmt.execute(sql);
+		stmt.close();
+	}
+
 	public static void save(List<ReminderBean> rBeanList) {
 
 		for (ReminderBean rBean : rBeanList) {
-
-			String sql = "INSERT INTO AGENDA (ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ) "
-					+ "VALUES ("
-					+ rBean.getId()
-					+ ",' "
+			
+			String sql = "INSERT INTO AGENDA (NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ) "
+					+ "VALUES (' "
 					+ rBean.getTfName()
 					+ "', ' "
 					+ rBean.getDdStadt()
@@ -73,13 +74,13 @@ public class ReminderController {
 					+ convertDateToString(rBean.getDatePicker())
 					+ "',' "
 					+ rBean.getTfAdresse()
-					+ "' ,  "
+					+ "' , ' "
 					+ rBean.getTfFaxNb()
-					+ ","
+					+ "','"
 					+ rBean.getTfHandy()
-					+ ","
+					+ "','"
 					+ rBean.getTfPhone()
-					+ ",' "
+					+ "',' "
 					+ rBean.getTfEmail() + "',' " + rBean.getTfNotiz() + "' );";
 			try {
 
@@ -100,10 +101,7 @@ public class ReminderController {
 
 	public static List<ReminderBean> load(List<ReminderBean> rBeanList) {
 		ResultSet rs;
-
-		System.out.println(rBeanList.size());
-
-		// delete all beans from list
+		// reset list
 		rBeanList.clear();
 		try {
 			rs = stmt.executeQuery("SELECT * FROM AGENDA;");
@@ -148,7 +146,6 @@ public class ReminderController {
 			String sql = "DELETE from AGENDA where ID=" + rBean.getId() + ";";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -156,7 +153,6 @@ public class ReminderController {
 	public static ResultSet select(String query) {
 		ResultSet result = null;
 
-		// create statment
 		try {
 			Statement s = (Statement) conn.createStatement();
 			result = s.executeQuery(query);

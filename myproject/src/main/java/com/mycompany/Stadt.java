@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Stadt {
-
+	
 	BERLIN("Berlin"),
 	HAMBURG("Hamburg"), 
 	MUENCHEN("München"), 
@@ -13,10 +13,14 @@ public enum Stadt {
 	KOELN("Köln"), 
 	LEINZIG("Leipzig");
 
+
 	private String stadt;
 
 	private Stadt(String s) {
 		stadt = s;
+	}
+	public void setStadt(String stadt) {
+		this.stadt = stadt;
 	}
 
 	public String getStadt() {
