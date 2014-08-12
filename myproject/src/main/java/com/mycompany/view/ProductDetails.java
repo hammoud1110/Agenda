@@ -3,10 +3,12 @@
  * @author Hammoud
  * @version 1.0
  */
-package com.mycompany;
+package com.mycompany.view;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+
+import com.mycompany.model.Product;
 
 public class ProductDetails extends WebPage {
 	/**

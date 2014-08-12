@@ -5,6 +5,10 @@ import java.io.Serializable;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
+import com.mycompany.view.PanelCalc;
+import com.mycompany.view.PanelReminder;
+import com.mycompany.view.PanelRest;
+
 public class HomePage extends WebPage implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

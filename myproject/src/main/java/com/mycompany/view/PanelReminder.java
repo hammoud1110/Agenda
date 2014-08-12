@@ -4,7 +4,7 @@
  * @version 1.0
  */
 
-package com.mycompany;
+package com.mycompany.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +24,11 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+
+import com.mycompany.HomePage;
+import com.mycompany.entity.ReminderController;
+import com.mycompany.entity.Stadt;
+import com.mycompany.model.ReminderBean;
 
 public class PanelReminder extends Panel implements Serializable {
 	/**
@@ -161,11 +166,7 @@ public class PanelReminder extends Panel implements Serializable {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 
-				rBeanList = ReminderController.load(rBeanList);
-				rBeanList.add(rBean);
-
-				connect = ReminderController.connect();
-				ReminderController.save(rBeanList);
+				ReminderController.save(rBean);
 				
 				form.info("Der Eintrag wurde gespeichert");
 				target.add(findParent(HomePage.class));

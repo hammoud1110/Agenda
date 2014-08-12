@@ -3,7 +3,7 @@
  * @author Hammoud
  * @version 1.0
  */
-package com.mycompany;
+package com.mycompany.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +15,8 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+
+import com.mycompany.model.Product;
 
 public class PanelRest extends Panel implements Serializable {
 

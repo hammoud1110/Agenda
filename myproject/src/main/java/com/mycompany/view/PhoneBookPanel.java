@@ -3,7 +3,7 @@
  * @author Hammoud
  * @version 1.0
  */
-package com.mycompany;
+package com.mycompany.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,9 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.resource.SharedResourceReference;
+
+import com.mycompany.entity.ReminderController;
+import com.mycompany.model.ReminderBean;
 
 public class PhoneBookPanel extends Panel {
 

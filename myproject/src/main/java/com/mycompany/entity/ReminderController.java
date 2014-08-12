@@ -1,4 +1,4 @@
-package com.mycompany;
+package com.mycompany.entity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.mycompany.model.ReminderBean;
 
 public class ReminderController {
 	// connection object for db connection
@@ -36,7 +38,7 @@ public class ReminderController {
 			conn.setAutoCommit(true);
 			stmt = conn.createStatement();
 
-			 stmt.executeUpdate("drop table if exists AGENDA;");
+			stmt.executeUpdate("drop table if exists AGENDA;");
 			intializeDatabase();
 
 			isConnected = true;
@@ -64,33 +66,39 @@ public class ReminderController {
 	public static void save(List<ReminderBean> rBeanList) {
 
 		for (ReminderBean rBean : rBeanList) {
-			
-			String sql = "INSERT INTO AGENDA (NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ) "
-					+ "VALUES (' "
-					+ rBean.getTfName()
-					+ "', ' "
-					+ rBean.getDdStadt()
-					+ "',' "
-					+ convertDateToString(rBean.getDatePicker())
-					+ "',' "
-					+ rBean.getTfAdresse()
-					+ "' , ' "
-					+ rBean.getTfFaxNb()
-					+ "','"
-					+ rBean.getTfHandy()
-					+ "','"
-					+ rBean.getTfPhone()
-					+ "',' "
-					+ rBean.getTfEmail() + "',' " + rBean.getTfNotiz() + "' );";
-			try {
 
-				stmt.executeUpdate(sql);
-
-			} catch (SQLException e) {
-				System.err.println("Something went wrong while saving");
-				e.printStackTrace();
-			}
+			save(rBean);
 		}
+	}
+
+	public static void save(ReminderBean rBean) {
+
+		String sql = "INSERT INTO AGENDA (NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ) "
+				+ "VALUES (' "
+				+ rBean.getTfName()
+				+ "', ' "
+				+ rBean.getDdStadt()
+				+ "',' "
+				+ convertDateToString(rBean.getDatePicker())
+				+ "',' "
+				+ rBean.getTfAdresse()
+				+ "' , ' "
+				+ rBean.getTfFaxNb()
+				+ "','"
+				+ rBean.getTfHandy()
+				+ "','"
+				+ rBean.getTfPhone()
+				+ "',' "
+				+ rBean.getTfEmail() + "',' " + rBean.getTfNotiz() + "' );";
+		try {
+
+			stmt.executeUpdate(sql);
+
+		} catch (SQLException e) {
+			System.err.println("Something went wrong while saving");
+			e.printStackTrace();
+		}
+
 		try {
 			stmt.close();
 		} catch (SQLException e) {

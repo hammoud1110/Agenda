@@ -1,4 +1,4 @@
-package com.mycompany;
+package com.mycompany.view;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +19,9 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.junit.internal.runners.model.EachTestNotifier;
+
+import com.mycompany.entity.ReminderController;
+import com.mycompany.model.ReminderBean;
 
 public class TaskOverviewPanel extends Panel {
 	/**

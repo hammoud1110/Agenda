@@ -3,7 +3,7 @@
  * @author Hammoud
  * @version 1.0
  */
-package com.mycompany;
+package com.mycompany.model;
 
 import java.util.ArrayList;
 import java.util.List;

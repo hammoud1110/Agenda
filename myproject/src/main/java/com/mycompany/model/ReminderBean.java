@@ -3,12 +3,14 @@
  * @author Hammoud
  * @version 1.0
  */
-package com.mycompany;
+package com.mycompany.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.mycompany.entity.ReminderController;
 
 public class ReminderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
