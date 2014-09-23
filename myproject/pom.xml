@@ -58,6 +58,7 @@
 			<version>1.2.16</version>
 		</dependency>
 
+
 		<!-- JUNIT DEPENDENCY FOR TESTING -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -78,6 +79,16 @@
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.7.2</version>
 		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>5.0.0.Alpha6</version>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.firebirdsql.jdbc</groupId>

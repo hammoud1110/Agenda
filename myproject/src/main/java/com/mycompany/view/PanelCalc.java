@@ -21,7 +21,6 @@ public class PanelCalc extends Panel implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int result1 = 0;
 	private double result = 0;
 
 	private String txt = "";
@@ -40,206 +39,291 @@ public class PanelCalc extends Panel implements Serializable {
 	public PanelCalc(String id) {
 		super(id);
 
-		final Form form = new Form("form");
+		final Form<?> form = new Form<Object>("form");
 		add(form).setOutputMarkupId(true).setOutputMarkupPlaceholderTag(true);
 
 		tfAusgabe.setOutputMarkupId(true);
 		form.add(tfAusgabe);
 
-		form.add(new AjaxLink("zero") {
+		form.add(new AjaxLink<Object>("zero") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "0";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
 
-		form.add(new AjaxLink("one") {
+		form.add(new AjaxLink<Object>("one") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "1";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
 
-		form.add(new AjaxLink("two") {
+		form.add(new AjaxLink<Object>("two") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "2";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("three") {
+		form.add(new AjaxLink<Object>("three") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "3";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("four") {
+		form.add(new AjaxLink<Object>("four") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "4";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("five") {
+		form.add(new AjaxLink<Object>("five") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "5";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("six") {
+		form.add(new AjaxLink<Object>("six") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "6";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("seven") {
+		form.add(new AjaxLink<Object>("seven") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "7";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("eight") {
+		form.add(new AjaxLink<Object>("eight") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "8";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("nine") {
+		form.add(new AjaxLink<Object>("nine") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + "9";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
 
-		form.add(new AjaxLink("plus") {
+		form.add(new AjaxLink<Object>("plus") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				if (flag == false) {
-					System.out.println("+");
+//					System.out.println("+");
 					toBeUsed = txt;
 				}
 				txt = "";
 				operation = "+";
 
-				System.out.println("txt: " + txt);
+//				System.out.println("txt: " + txt);
 			}
 		});
-		form.add(new AjaxLink("minus") {
+		form.add(new AjaxLink<Object>("minus") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				if (flag == false) {
-					System.out.println("-");
+//					System.out.println("-");
 					toBeUsed = txt;
 				}
 				txt = "";
 				operation = "-";
 			}
 		});
-		form.add(new AjaxLink("divide") {
+		form.add(new AjaxLink<Object>("divide") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				if (flag == false) {
-					System.out.println("/");
+//					System.out.println("/");
 					toBeUsed = txt;
 				}
 				txt = "";
 				operation = "/";
 			}
 		});
-		form.add(new AjaxLink("multiply") {
+		form.add(new AjaxLink<Object>("multiply") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				if (flag == false) {
-					System.out.println("X");
+//					System.out.println("X");
 					toBeUsed = txt;
 				}
 				txt = "";
 				operation = "X";
 			}
 		});
-		form.add(new AjaxLink("comma") {
+		form.add(new AjaxLink<Object>("comma") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				txt = txt + ".";
 				strMdl.setObject(txt);
-				System.out.println("txt is " + txt);
+//				System.out.println("txt is " + txt);
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("equal") {
+		form.add(new AjaxLink<Object>("equal") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 
 				if (operation.equals("/")) {
-					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+//					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
 					result = Double.parseDouble(toBeUsed)
 							/ Double.parseDouble(txt);
 				} else if (operation.equals("+")) {
-					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+//					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
 					result = Double.parseDouble(toBeUsed)
 							+ Double.parseDouble(txt);
 				} else if (operation.equals("X")) {
-					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+//					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
 					result = Double.parseDouble(toBeUsed)
 							* Double.parseDouble(txt);
 				} else {
-					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
+//					System.out.println("toBeUsed " + toBeUsed + " txt " + txt);
 					result = Double.parseDouble(toBeUsed)
 							- Double.parseDouble(txt);
 				}
 				toBeUsed = String.valueOf(result);
-				System.out.println("toBeUsed " + toBeUsed);
+//				System.out.println("toBeUsed " + toBeUsed);
 				strMdl.setObject(toBeUsed);
 				flag = true;
 
 				target.add(form);
 			}
 		});
-		form.add(new AjaxLink("delete") {
+		form.add(new AjaxLink<Object>("delete") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -255,7 +339,12 @@ public class PanelCalc extends Panel implements Serializable {
 			}
 		});
 
-		form.add(new AjaxLink("deleteAll") {
+		form.add(new AjaxLink<Object>("deleteAll") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {

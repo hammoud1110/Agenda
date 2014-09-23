@@ -1,24 +1,16 @@
 package com.mycompany.view;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.event.IEvent;
-import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
-import org.junit.internal.runners.model.EachTestNotifier;
 
 import com.mycompany.entity.ReminderController;
 import com.mycompany.model.ReminderBean;
@@ -30,7 +22,7 @@ public class TaskOverviewPanel extends Panel {
 	private static final long serialVersionUID = 1411187233945814779L;
 	ReminderBean rBean = new ReminderBean();
 	List<ReminderBean> rBeanList = new ArrayList<ReminderBean>();
-	
+
 	public Form showForm;
 	public Form hideForm;
 	public Form tableForm;
@@ -54,9 +46,9 @@ public class TaskOverviewPanel extends Panel {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				
-				rBeanList=ReminderController.load(rBeanList);
-				
+
+				rBeanList = ReminderController.load(rBeanList);
+
 				if (visibility == true) {
 
 					tableForm.setVisibilityAllowed(false);
@@ -68,13 +60,14 @@ public class TaskOverviewPanel extends Panel {
 					visibility = true;
 				}
 
-				target.add(tableForm,hideForm,showForm);
+				target.add(tableForm, hideForm, showForm);
 			}
 		});
 
 		hideForm.add(new AjaxLink("hideButton") {
 
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onConfigure() {
 				setEnabled(visibility);
@@ -82,9 +75,9 @@ public class TaskOverviewPanel extends Panel {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-//				rBean=ReminderController.load(rBean);
-				rBeanList=ReminderController.load(rBeanList);
-				
+				// rBean=ReminderController.load(rBean);
+				rBeanList = ReminderController.load(rBeanList);
+
 				if (visibility == false) {
 
 					tableForm.setVisibilityAllowed(true);
@@ -96,7 +89,7 @@ public class TaskOverviewPanel extends Panel {
 					visibility = false;
 				}
 
-				target.add(tableForm,hideForm,showForm);
+				target.add(tableForm, hideForm, showForm);
 			}
 		});
 
@@ -113,12 +106,10 @@ public class TaskOverviewPanel extends Panel {
 		};
 		tableForm.setOutputMarkupId(true).setOutputMarkupPlaceholderTag(true);
 		add(tableForm);
-		
 
-		
-//		rBeanList.add(rBean);
-		rBeanList=ReminderController.load(rBeanList);
-		
+		// rBeanList.add(rBean);
+		rBeanList = ReminderController.load(rBeanList);
+
 		eachEntry = new ListView<ReminderBean>("eachEntry", rBeanList) {
 			/**
 			 * 
@@ -127,17 +118,25 @@ public class TaskOverviewPanel extends Panel {
 
 			protected void populateItem(ListItem item) {
 				ReminderBean r = (ReminderBean) item.getModelObject();
-				
+
 				item.add(new Label("id", r.getId()));
-				item.add(new Label("name",r.getTfName()));
-				item.add(new Label("stadt",new PropertyModel<String>(item.getDefaultModel(), "ddStadt")));
-				item.add(new Label("age",new PropertyModel<String>(item.getDefaultModel(), "datePicker")));
-				item.add(new Label("adresse",new PropertyModel<String>(item.getDefaultModel(), "tfAdresse")));
-				item.add(new Label("fax",new PropertyModel<String>(item.getDefaultModel(), "tfFaxNb")));
-				item.add(new Label("handy",new PropertyModel<String>(item.getDefaultModel(), "tfHandy")));
-				item.add(new Label("telefon",new PropertyModel<String>(item.getDefaultModel(), "tfPhone")));
-				item.add(new Label("email",new PropertyModel<String>(item.getDefaultModel(), "tfEmail")));
-				item.add(new Label("notiz",new PropertyModel<String>(item.getDefaultModel(), "tfNotiz")));
+				item.add(new Label("name", r.getTfName()));
+				item.add(new Label("stadt", new PropertyModel<String>(item
+						.getDefaultModel(), "ddStadt")));
+				item.add(new Label("age", new PropertyModel<String>(item
+						.getDefaultModel(), "datePicker")));
+				item.add(new Label("adresse", new PropertyModel<String>(item
+						.getDefaultModel(), "tfAdresse")));
+				item.add(new Label("fax", new PropertyModel<String>(item
+						.getDefaultModel(), "tfFaxNb")));
+				item.add(new Label("handy", new PropertyModel<String>(item
+						.getDefaultModel(), "tfHandy")));
+				item.add(new Label("telefon", new PropertyModel<String>(item
+						.getDefaultModel(), "tfPhone")));
+				item.add(new Label("email", new PropertyModel<String>(item
+						.getDefaultModel(), "tfEmail")));
+				item.add(new Label("notiz", new PropertyModel<String>(item
+						.getDefaultModel(), "tfNotiz")));
 
 			}
 

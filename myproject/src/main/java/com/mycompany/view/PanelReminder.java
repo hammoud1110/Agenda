@@ -61,6 +61,11 @@ public class PanelReminder extends Panel implements Serializable {
 
 		tfName.add(new OnChangeAjaxBehavior() {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
 
@@ -70,6 +75,11 @@ public class PanelReminder extends Panel implements Serializable {
 		final TextField<String> tfAdresse = new TextField<String>("tfAdresse",
 				new PropertyModel<String>(rBean, "tfAdresse"));
 		tfAdresse.add(new OnChangeAjaxBehavior() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -85,6 +95,11 @@ public class PanelReminder extends Panel implements Serializable {
 
 		tfFaxNb.add(new OnChangeAjaxBehavior() {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
 
@@ -96,6 +111,11 @@ public class PanelReminder extends Panel implements Serializable {
 
 		tfPhone.add(new OnChangeAjaxBehavior() {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
 
@@ -104,6 +124,11 @@ public class PanelReminder extends Panel implements Serializable {
 		final TextField<String> tfHandy = new TextField<String>("tfHandy",
 				new PropertyModel<String>(rBean, "tfHandy"));
 		tfHandy.add(new OnChangeAjaxBehavior() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -114,6 +139,11 @@ public class PanelReminder extends Panel implements Serializable {
 				new PropertyModel<String>(rBean, "tfEmail"));
 
 		tfEmail.add(new OnChangeAjaxBehavior() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -126,6 +156,11 @@ public class PanelReminder extends Panel implements Serializable {
 
 		tfStadt.add(new OnChangeAjaxBehavior() {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
 
@@ -135,6 +170,11 @@ public class PanelReminder extends Panel implements Serializable {
 		final TextArea<String> tfNotiz = new TextArea<String>("tfNotiz",
 				new PropertyModel<String>(rBean, "tfNotiz"));
 		tfNotiz.add(new OnChangeAjaxBehavior() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -149,6 +189,11 @@ public class PanelReminder extends Panel implements Serializable {
 		datePicker.setAutoHide(true);
 		dateTextField.add(datePicker);
 		dateTextField.add(new OnChangeAjaxBehavior() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
