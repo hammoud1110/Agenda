@@ -108,6 +108,16 @@
 			<artifactId>wicket-datetime</artifactId>
 			<version>7.0.0-M2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.2-1003-jdbc4</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
@@ -189,6 +199,7 @@
 	</build>
 
 	<repositories>
+
 		<repository>
 			<id>Apache Nexus</id>
 			<url>https://repository.apache.org/content/repositories/snapshots/</url>
@@ -199,5 +210,6 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		
 	</repositories>
 </project>

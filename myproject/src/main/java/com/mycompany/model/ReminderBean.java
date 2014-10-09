@@ -10,49 +10,45 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.mycompany.entity.ReminderController;
 
+@Entity 
 public class ReminderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String tfDate;
-	private String tfTime;
-	private String tfTask;
 	private int id;
-	
 
-	private String tfIDDelete;
+	private String tfDate;
+
+	private String tfTime;
+
+	private String tfTask;
+
 	private String tfName;
 
 	private String tfAdresse;
+
 	private String ddStadt;
+
 	private String tfEmail;
+
 	private String tfNotiz;
 
 	private Date datePicker;
+
 	private String tfPhone;
+
 	private String tfFaxNb;
+
 	private String tfHandy;
-	private List<String> rBeanList = new ArrayList<String>();
-	
-	
-	public List<String> getrBeanList() {
-		// ID,NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ
-		rBeanList.add(getTfName());
-		rBeanList.add(getDdStadt());
-		rBeanList.add(ReminderController.convertDateToString(getDatePicker()));
-		rBeanList.add(getTfAdresse());
-		rBeanList.add(getTfFaxNb());
-		rBeanList.add(getTfHandy());
-		rBeanList.add(getTfPhone());
-		rBeanList.add(getTfEmail());
-		rBeanList.add(getTfNotiz());
-		
-		
-		return rBeanList;
-	}
-	
-	
+
 	public void clearBean() {
 		// NAME,STADT,AGE,ADDRESS,FAX, HANDY, TELEFON, EMAIL, NOTIZ
 		this.setTfName("");
@@ -64,10 +60,10 @@ public class ReminderBean implements Serializable {
 		this.setTfHandy("");
 		this.setTfPhone("");
 		this.setTfNotiz("");
-		
-		
+
 	}
 
+	@Column(name = "TELEFON")
 	public String getTfPhone() {
 		return tfPhone;
 	}
@@ -75,15 +71,18 @@ public class ReminderBean implements Serializable {
 	public void setTfPhone(String tfPhone) {
 		this.tfPhone = tfPhone;
 	}
-
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "ID")
 	public int getId() {
 		return id;
 	}
 
+	
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	@Column(name = "DATE")
 	public String getTfDate() {
 		return tfDate;
 	}
@@ -92,6 +91,7 @@ public class ReminderBean implements Serializable {
 		this.tfDate = tfDate;
 	}
 
+	@Column(name = "TIME")
 	public String getTfTime() {
 		return tfTime;
 	}
@@ -100,6 +100,7 @@ public class ReminderBean implements Serializable {
 		this.tfTime = tfTime;
 	}
 
+	@Column(name = "TASK")
 	public String getTfTask() {
 		return tfTask;
 	}
@@ -108,6 +109,7 @@ public class ReminderBean implements Serializable {
 		this.tfTask = tfTask;
 	}
 
+	@Column(name = "FAX")
 	public String getTfFaxNb() {
 		return tfFaxNb;
 	}
@@ -116,14 +118,7 @@ public class ReminderBean implements Serializable {
 		this.tfFaxNb = tfFaxNb;
 	}
 
-	public String getTfIDDelete() {
-		return tfIDDelete;
-	}
-
-	public void setTfIDDelete(String tfIDDelete) {
-		this.tfIDDelete = tfIDDelete;
-	}
-
+	@Column(name = "NAME")
 	public String getTfName() {
 		return tfName;
 	}
@@ -132,6 +127,7 @@ public class ReminderBean implements Serializable {
 		this.tfName = tfName;
 	}
 
+	@Column(name = "ADRESSE")
 	public String getTfAdresse() {
 		return tfAdresse;
 	}
@@ -140,6 +136,7 @@ public class ReminderBean implements Serializable {
 		this.tfAdresse = tfAdresse;
 	}
 
+	@Column(name = "EMAIL")
 	public String getTfEmail() {
 		return tfEmail;
 	}
@@ -148,6 +145,7 @@ public class ReminderBean implements Serializable {
 		this.tfEmail = tfEmail;
 	}
 
+	@Column(name = "NOTIZ")
 	public String getTfNotiz() {
 		return tfNotiz;
 	}
@@ -156,6 +154,7 @@ public class ReminderBean implements Serializable {
 		this.tfNotiz = tfNotiz;
 	}
 
+	@Column(name = "HANDY")
 	public String getTfHandy() {
 		return tfHandy;
 	}
@@ -164,6 +163,7 @@ public class ReminderBean implements Serializable {
 		this.tfHandy = tfHandy;
 	}
 
+	@Column(name = "GEBURTSDATUM")
 	public Date getDatePicker() {
 		return datePicker;
 	}
@@ -172,6 +172,7 @@ public class ReminderBean implements Serializable {
 		this.datePicker = datePicker;
 	}
 
+	@Column(name = "STADT")
 	public String getDdStadt() {
 		return ddStadt;
 	}

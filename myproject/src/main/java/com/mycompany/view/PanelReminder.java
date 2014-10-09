@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jms.Session;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -24,6 +26,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import com.mycompany.HomePage;
 import com.mycompany.entity.ReminderController;
@@ -48,13 +52,12 @@ public class PanelReminder extends Panel implements Serializable {
 		form = new Form("form");
 		add(form).setOutputMarkupPlaceholderTag(true).setOutputMarkupId(true);
 
-	        ComponentFeedbackMessageFilter filter = new ComponentFeedbackMessageFilter(form);
+		ComponentFeedbackMessageFilter filter = new ComponentFeedbackMessageFilter(
+				form);
 
-	        FeedbackPanel feedback = new FeedbackPanel("feedback", filter);
-//	        feedback.setEscapeModelStrings(false);
-	        form.add(feedback); 
-		
-	        
+		FeedbackPanel feedback = new FeedbackPanel("feedback", filter);
+		// feedback.setEscapeModelStrings(false);
+		form.add(feedback);
 
 		final TextField<String> tfName = new TextField<String>("tfName",
 				new PropertyModel<String>(rBean, "tfName"));
@@ -211,8 +214,9 @@ public class PanelReminder extends Panel implements Serializable {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 
-				ReminderController.save(rBean);
-				
+//				ReminderController.save(rBean);
+				 ReminderController.speichern(rBean);
+
 				form.info("Der Eintrag wurde gespeichert");
 				target.add(findParent(HomePage.class));
 			}
@@ -225,8 +229,8 @@ public class PanelReminder extends Panel implements Serializable {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				rBean.clearBean();
-//				target.add(tfName, tfAdresse, tfStadt, tfFaxNb, tfPhone,
-//						tfHandy, tfEmail, tfNotiz, dateTextField);
+				// target.add(tfName, tfAdresse, tfStadt, tfFaxNb, tfPhone,
+				// tfHandy, tfEmail, tfNotiz, dateTextField);
 				target.add(findParent(HomePage.class));
 			}
 		});

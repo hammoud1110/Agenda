@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import com.mycompany.model.ReminderBean;
 
 public class ReminderController {
@@ -63,12 +67,32 @@ public class ReminderController {
 		stmt.close();
 	}
 
-	public static void save(List<ReminderBean> rBeanList) {
+	public static void speichern(ReminderBean rBean) {
 
-		for (ReminderBean rBean : rBeanList) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(rBean);
+		session.getTransaction().commit();
+		session.close();
+	}
 
-			save(rBean);
+	public static List<ReminderBean> laden(List<ReminderBean> rBeanList) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		
+		
+
+		List<ReminderBean> list = new ArrayList<ReminderBean>();
+		list=session.createQuery("from ReminderBean").list();
+		session.getTransaction().commit();
+		session.close();
+		if(list.size()!=0){
+			for (ReminderBean reminderBean : rBeanList) {
+				rBeanList.add((ReminderBean)reminderBean);
+			}
 		}
+		
+		return rBeanList;
 	}
 
 	public static void save(ReminderBean rBean) {
