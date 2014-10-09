@@ -39,7 +39,8 @@ public class PhoneBookPanel extends Panel {
 		add(form).setOutputMarkupPlaceholderTag(true);
 		
 		// PhoneBook.getGlobal() .getEntries()
-		rBeanList=ReminderController.load(rBeanList);
+//		rBeanList=ReminderController.load(rBeanList);
+		rBeanList=ReminderController.laden(rBeanList);
 		eachEntry = new ListView<ReminderBean> ("eachEntry", rBeanList) {
 			/**
 			 * 
@@ -67,7 +68,8 @@ public class PhoneBookPanel extends Panel {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				rBeanList=ReminderController.load(rBeanList);
+//			    rBeanList=ReminderController.load(rBeanList);
+				rBeanList=ReminderController.laden(rBeanList);
 				target.add(form);
 				
 			}
